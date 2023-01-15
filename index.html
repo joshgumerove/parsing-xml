@@ -8,5 +8,35 @@
   </head>
   <body>
     <h1>Example of using XML</h1>
+    <div>
+      <b>Type of animal:</b> <span id="type"></span><br />
+      <b>Sound it makes:</b> <span id="sound"></span><br />
+    </div>
   </body>
+  <script>
+    let animalXMLData = `
+    <animal>
+         <type>Dog</type>
+         <sound>Woof</sound>
+    </animal>
+    `;
+    //  use XML parser
+
+    let XMLparser = new DOMParser();
+
+    // need to convert xml string into a document tree
+
+    let XMLDocumentTree = XMLparser.parseFromString(animalXMLData, "text/xml");
+
+    // insert the animal data into our HTML page
+    let animalType =
+      XMLDocumentTree.getElementsByTagName("type")[0].childNodes[0].textContent;
+
+    document.getElementById("type").innerText = animalType;
+
+    let animalSound =
+      XMLDocumentTree.getElementsByTagName("sound")[0].childNodes[0]
+        .textContent;
+    document.getElementById("sound").innerText = animalSound;
+  </script>
 </html>
